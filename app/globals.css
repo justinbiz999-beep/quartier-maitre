@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-creme: #f6f1e7;
+  --color-papier: #fffdf8;
+  --color-encre: #1f2433;
+  --color-gris: #5b6170;
+  --color-trait: #d9d1c1;
+  --color-bulle: #f5c542;
+  --color-valide: #2f8f58;
+  --color-ciel: #9fd3e6;
+  --color-alerte: #b3261e;
+
+  --font-pixel: "Pixelify Sans", ui-monospace, monospace;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-creme);
+  color: var(--color-encre);
+  font-family: var(--font-sans);
+}
+
+/* Boutons et cartes « pixel » : contour franc, ombre décalée */
+.bloc {
+  background: var(--color-papier);
+  border: 2px solid var(--color-encre);
+  box-shadow: 4px 4px 0 var(--color-encre);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border: 2px solid var(--color-encre);
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  box-shadow: 3px 3px 0 var(--color-encre);
+  text-decoration: none;
+  color: var(--color-encre);
+  background: var(--color-papier);
+}
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--color-encre);
+}
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--color-encre);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 3px 3px 0 var(--color-encre);
+}
+.btn-principal {
+  background: var(--color-encre);
+  color: var(--color-creme);
+}
+.btn-jaune {
+  background: var(--color-bulle);
+}
+
+.champ {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--color-encre);
+  background: var(--color-papier);
+  font: inherit;
+  color: inherit;
+  box-sizing: border-box;
+}
+.champ:focus-visible,
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #2f6fd6;
+  outline-offset: 2px;
+}
+
+.pixelise {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

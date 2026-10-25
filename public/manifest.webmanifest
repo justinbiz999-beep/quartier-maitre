@@ -1,0 +1,11 @@
+{
+  "name": "Quartier-Maître",
+  "short_name": "Quartier-Maître",
+  "description": "L'équipage d'agents IA de votre boutique. Rien ne part sans vous.",
+  "start_url": "/qg",
+  "display": "standalone",
+  "background_color": "#f6f1e7",
+  "theme_color": "#f6f1e7",
+  "lang": "fr",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
