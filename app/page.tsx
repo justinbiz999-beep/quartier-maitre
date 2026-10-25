@@ -47,10 +47,18 @@ export default function Accueil() {
               </a>
             </div>
           </div>
-          <div className="bloc p-3">
-            <CarteQG infos={INFOS_VITRINE} decor />
-            <p className="mb-0 mt-3 text-sm text-gris">
-              Votre QG : chaque équipe à son poste. Une bulle jaune, c&apos;est une décision qui vous attend.
+          <div className="bloc overflow-hidden p-0">
+            <CarteQG
+              infos={INFOS_VITRINE}
+              messages={{
+                etudes: "3 niches en cours de mesure.",
+                veille: "Un concurrent a baissé ses prix de 15 %.",
+                sav: "Réponse prête pour une cliente.",
+              }}
+              decor
+            />
+            <p className="m-0 border-t-2 border-encre px-4 py-3 text-sm text-gris">
+              Votre QG : chaque équipe sur son île. Une pastille jaune, c&apos;est une décision qui vous attend.
             </p>
           </div>
         </section>

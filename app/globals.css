@@ -140,6 +140,35 @@ button:focus-visible {
   }
 }
 
+/* Carte d'équipe posée au-dessus de chaque île */
+.carte-ile {
+  color: var(--color-encre);
+  background: rgba(255, 253, 248, 0.94);
+  border: 2px solid var(--color-encre);
+  border-radius: 8px;
+  box-shadow:
+    0 3px 0 var(--color-encre),
+    0 8px 14px rgba(31, 36, 51, 0.22);
+  font-family: var(--font-sans);
+  transition: transform 120ms ease;
+}
+button.carte-ile:hover {
+  transform: translateY(-2px);
+}
+.carte-ile-choisie {
+  background: #fff6d6;
+  outline: 3px solid var(--color-bulle);
+  outline-offset: 1px;
+}
+
+/* Bulle de message d'un agent */
+.message-ile {
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid var(--color-encre);
+  border-radius: 10px;
+  box-shadow: 0 2px 0 var(--color-encre);
+}
+
 .zz {
   text-shadow:
     0 2px 0 var(--color-encre),

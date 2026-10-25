@@ -57,6 +57,17 @@ export default function QG() {
     return res;
   }, [etat]);
 
+  // Dernier message de chaque équipe (moins de 12 h), affiché en bulle sur la carte
+  const messages = useMemo(() => {
+    const res: Record<string, string> = {};
+    const limite = Date.now() - 12 * 3600_000;
+    for (const j of etat?.journal ?? []) {
+      if (j.equipe === "pont" || res[j.equipe] || new Date(j.le).getTime() < limite) continue;
+      res[j.equipe] = j.texte.length > 60 ? `${j.texte.slice(0, 57)}…` : j.texte;
+    }
+    return res;
+  }, [etat]);
+
   const enAttente = etat?.propositions.filter((p) => p.statut === "en_attente") ?? [];
   const traitees = etat?.propositions.filter((p) => p.statut !== "en_attente") ?? [];
   const actives = Object.entries(infos).filter(([id, i]) => id !== "pont" && i.etat !== "dort").length;
@@ -106,24 +117,24 @@ export default function QG() {
             <div className="bloc flex flex-col gap-1 bg-bulle p-4" role="status">
               <p className="m-0 font-pixel text-lg font-bold">Votre équipage est à bord.</p>
               <p className="m-0 text-sm">
-                Les équipes passent à leur rythme. Touchez une salle pour voir ce qu&apos;elle fait ; les bulles jaunes sont
+                Les équipes passent à leur rythme. Touchez une île pour voir ce que fait son équipe ; les pastilles jaunes sont
                 vos décisions en attente.
               </p>
             </div>
           )}
-          <div className="bloc p-2 sm:p-3">
-            <CarteQG infos={infos} selection={selection} onSelect={choisirSalle} />
+          <div className="bloc overflow-hidden p-0">
+            <CarteQG infos={infos} messages={messages} selection={selection} onSelect={choisirSalle} />
           </div>
           <ul className="m-0 flex list-none flex-wrap gap-x-5 gap-y-2 p-0 text-sm">
             <li className="flex items-center gap-2">
-              <span className="inline-block h-4 w-4 border-2 border-encre bg-bulle" aria-hidden="true" /> Décision en attente
+              <span className="inline-block h-3 w-3 rounded-full border border-encre bg-bulle" aria-hidden="true" /> Décision en attente
             </li>
             <li className="flex items-center gap-2">
-              <span className="inline-block h-4 w-4 border-2 border-encre bg-ciel" aria-hidden="true" /> L&apos;équipe travaille
+              <span className="inline-block h-3 w-3 rounded-full border border-encre bg-[#3fa66b]" aria-hidden="true" /> Au travail
             </li>
             <li className="flex items-center gap-2">
-              <span className="inline-block h-4 w-4 border-2 border-encre bg-[#5d5f68]" aria-hidden="true" /> En pause jusqu&apos;au
-              prochain passage
+              <span className="inline-block h-3 w-3 rounded-full border border-encre bg-[#9aa0ad]" aria-hidden="true" /> En pause jusqu&apos;au
+              prochain passage (île assombrie)
             </li>
           </ul>
           {MODE_DEMO && (
@@ -192,7 +203,7 @@ export default function QG() {
 
           {onglet === "equipe" && (
             <div className="flex flex-col gap-4" role="tabpanel">
-              {!selection && <p className="bloc m-0 p-4">Touchez une salle sur la carte pour voir son équipe.</p>}
+              {!selection && <p className="bloc m-0 p-4">Touchez une île sur la carte pour voir son équipe.</p>}
               {selection === "pont" && (
                 <div className="bloc flex flex-col gap-3 p-4">
                   <h2 className="m-0 text-xl font-extrabold">{PONT.nom}</h2>
