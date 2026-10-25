@@ -95,6 +95,69 @@ button:focus-visible {
   image-rendering: crisp-edges;
 }
 
+/* Étiquettes de la carte : autocollants en relief */
+.sticker {
+  color: var(--color-encre);
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf8 55%, #efe8da 100%);
+  border: 2px solid var(--color-encre);
+  border-radius: 4px;
+  box-shadow:
+    0 3px 0 var(--color-encre),
+    0 5px 6px rgba(31, 36, 51, 0.25);
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+/* Bulle « décision en attente » : jaune, en relief, qui rebondit */
+.bulle {
+  color: var(--color-encre);
+  background: radial-gradient(circle at 35% 30%, #fff3b0 0%, #f5c542 45%, #d9a521 100%);
+  border: 2px solid var(--color-encre);
+  border-radius: 6px;
+  box-shadow:
+    0 3px 0 var(--color-encre),
+    0 6px 8px rgba(31, 36, 51, 0.3);
+  animation: rebond 1.4s ease-in-out infinite;
+}
+.bulle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 8px;
+  height: 8px;
+  background: #e2b12b;
+  border-right: 2px solid var(--color-encre);
+  border-bottom: 2px solid var(--color-encre);
+  transform: translateX(-50%) rotate(45deg);
+}
+@keyframes rebond {
+  0%,
+  100% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: -4px;
+  }
+}
+
+.zz {
+  text-shadow:
+    0 2px 0 var(--color-encre),
+    0 0 6px rgba(31, 36, 51, 0.6);
+  animation: flotte 2.4s ease-in-out infinite;
+}
+@keyframes flotte {
+  0%,
+  100% {
+    opacity: 0.55;
+    margin-top: 0;
+  }
+  50% {
+    opacity: 1;
+    margin-top: -5px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
